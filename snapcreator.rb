@@ -1,5 +1,8 @@
 #!/usr/bin/env ruby
 
+
+#For taking LVM snaps and mounting them
+
 require 'fileutils.rb'
 
 #constants
