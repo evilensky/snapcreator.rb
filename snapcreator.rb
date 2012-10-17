@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 
+## For shutting down services and taking an LVM snap, mounting the snap.
 
-#For taking LVM snaps and mounting them
 
 require 'fileutils.rb'
 
@@ -48,6 +48,8 @@ end
 
 def mount_snapshot(vg, lv, backup_date, backup_path)
   `mount /dev/#{vg}/#{lv}-#{backup_date} #{backup_path}#{backup_date}`
+  #create a non-volatile symlink for backup process
+  FileUtils.ln_s "#{backup_path}#{backup_date}", "#{backup_path}/current"
 end
 
 
