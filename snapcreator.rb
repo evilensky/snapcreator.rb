@@ -8,7 +8,7 @@ require 'fileutils.rb'
 #constants
 backup_path = "/mnt/orabackup/"
 backup_date = Time.now.strftime("%Y%m%d%H%M")
-snap_size   = "500Mib"
+snap_size   = "49MiB"
 vg = "vgRoot"
 lv = "lvRoot"
 
@@ -60,6 +60,7 @@ def go(size, vg, lv, backup_date, backup_path)
     shutdown_service("httpd")
     take_snapshot(size, vg, lv, backup_date)
     mount_snapshot(vg, lv, backup_date, backup_path)
+    startup_service("httpd")
   else
       puts "aborted due to lock file(s)"
   end
